@@ -1,0 +1,65 @@
+.thumbnail img{
+  max-height: 150px;
+}
+
+.thumbnail .description{
+  color: rgba(7, 1, 1, 0.85)
+}
+
+.price{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+footer {
+  margin: 0;
+
+}
+
+.wrapper {
+  min-height:100%;
+  position: relative;
+}
+
+.footer{
+    position:absolute;
+    bottom: -80px;
+    width: 100%;
+    background-color: lavender;
+}
+
+html{
+  height:100%;
+}
+
+body {
+   /* Required padding   for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+  height:100%;
+  background-color: lightblue;
+}
+
+.AddD{
+  margin-top: 15%;
+}
+
+.btna{
+  padding: 15px 32px;
+  font-size: 32px;
+}
+
+.left{
+    text-align: left;
+}
+
+.bot{
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 768px){
+    .footer{
+        font-size: 10px;
+    }
+}
+
+
+

@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <div id="success" class="alert alert-success {{#if noMessages}}hidden{{/if}}">
+            {{ successMsg }}
+        </div>
+    </div>
+</div>
+<div class ="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>ข้อมูลผู้ใช้งาน</h1>
+        <hr>
+        <div class="row">
+        <div class="col-xs-6 ">
+            <h1>รายการสั่งซื้อของฉัน</h1>
+        </div>
+            <div class="col-xs-6 " align="right">
+                <h1><a href="/payment" type="button" class="btn btn-success">แจ้งยืนยันการโอนเงิน</a></h1>
+            </div>
+        </div>
+
+        {{# each orders }}
+        <p><strong>เลขที่สั่งซื้อ </strong>{{ this.orderid }}</p>
+
+             <div class="panel panel-default">
+                <div class="panel-body">
+                     <ul class="list-group">
+                         {{# each this.items }}
+                         <li class="list-group-item">
+                             <span class="badge">{{ this.price }}</span>
+                             {{ this.item.title }} | {{ this.qty }} ชิ้น
+                         </li>
+                         {{/each}}
+                     </ul>
+                    <p><strong>เวลาการสั่งซื้อ </strong>{{ this.time }}</p>
+                </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>ราคารวม: {{ this.totalPrices }} บาท</strong>
+                    </div>
+
+                    <div class="col-md-6" align="right">
+                        <strong>สถานะ: {{ this.status }} </strong>
+                    </div>
+                </div>
+                 </div>
+        </div>
+        {{/each}}
+    </div>
+
+</div>

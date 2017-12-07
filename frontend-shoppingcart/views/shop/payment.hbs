@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <div id="success" class="alert alert-success {{#if noMessages}}hidden{{/if}}">
+            {{ successMsg }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <h1>แจ้งยืนการโอนเงิน</h1>
+
+        <form action="/payment" method="post" id="checkout-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="orderids">เลขที่สั่งซื้อ</label>
+                        <input type="text" id="orderids" class="form-control" required name="orderids"/>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="pricepayment">จำนวนเงินที่โอน</label>
+                        <input type="text" id="pricepayment" class="form-control" required name="pricepayment"/>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="timepayment">เวลาที่โอน</label>
+                        <input type="datetime-local" id="timepayment" class="form-control" required name="timepayment"/>
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+
+                    <div align="left"><label for="kb">ธนาคารกสิกรไทย xxx</label></div>
+                    <input type="radio" id="kb"  class="form-control" value="kb" required name="bank"/>
+
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <div align="left"><label for="scb">ธนาคารไทยพาณิชย์ xxx</label></div>
+                        <input type="radio" id="scb"  class="form-control"  value="scb" required name="bank"/>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-success btn-block">แจ้งโอนเงิน</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="javascripts/checkout.js"></script>

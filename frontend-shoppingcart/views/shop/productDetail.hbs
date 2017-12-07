@@ -1,0 +1,30 @@
+
+
+{{#items}}
+<div class="row">
+<div class="col-sm-4 col-md-4" >
+    <div class="img-responsive">
+        <h3> {{ this.title }} </h3>
+        <img src="{{ this.imagePath }}" alt="..."
+             class="img-responsive" />
+        <br/>
+        <p> {{ this.description }} </p>
+
+    </div>
+</div>
+    <div align="right"  class="col-sm-8 col-md-4 AddD">
+        <h3> {{ this.price}} บาท</h3>
+        <h2>สินค้ามีจำนวนจำกัด</h2>
+        <a href="/productDetail/{{this._id}}/{{this.title}}" class="btn btn-success btna" role="button">เพิ่มสินค้า</a>
+
+    </div>
+</div>
+
+
+{{/items}}
+
+
+
+
+
+
