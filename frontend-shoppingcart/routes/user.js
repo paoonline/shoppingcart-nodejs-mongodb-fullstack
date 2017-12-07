@@ -1,4 +1,4 @@
-    var express = require('express');
+var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var passport = require('passport');
@@ -70,6 +70,7 @@ router.post('/signin', passport.authenticate('local.signin',{
         res.redirect(oldUrl);
     }else{
         res.redirect('/')
+
     }
 });
 

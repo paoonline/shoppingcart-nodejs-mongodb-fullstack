@@ -1,4 +1,4 @@
-<%layout('../layout')%>
+<% layout('../layout') %>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -7,7 +7,30 @@
         <!-- /.col-lg-12 -->
     </div>
 
+    <label>Search</label>
+    <input class="form-control">
+    <p class="help-block">Example block-level help text here.</p>
 
+    <div>
 
+        <% users1.forEach(function(users1) { %>
+
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><%= users1.email %></td>
+            </tr>
+
+            <% }); %>
+
+            </tbody>
+
+        </table>
+    </div>
 </div>
 <!-- /#page-wrapper -->

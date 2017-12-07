@@ -1,4 +1,7 @@
 var Bbs = require('../persister/bbs');
+var Payment = require('../persister/payment');
+var Orders = require('../persister/order');
+var users = require('../persister/user');
 module.exports = function(app, passport){
 	
 	 /* GET home page. */
@@ -37,15 +40,32 @@ module.exports = function(app, passport){
 	});
 
     app.get('/order',isAuthenticated, function(req, res) {
-        res.render('template/order', {});
+        Orders.find({}, function(err, orders){
+            res.render('template/order', { orders : orders});
+        });
     });
 
     app.get('/payment',isAuthenticated, function(req, res) {
-        res.render('template/payment', {});
+        //res.render('', {});
+        // Payment.find(function (err, docs) {
+        //     var productChunks = [];
+        //     var chunkSize = 3;
+        //     for (var i = 0; i < docs.length; i += chunkSize){
+        //         productChunks.push(docs.slice(i, i + chunkSize));
+        //     }
+        //     res.render('template/payment', { title: 'Shopping Cart', Payment: productChunks});
+        // });
+        Payment.find({}, function(err, payment){
+        Orders.find({}, function(err, orders){
+            res.render('template/payment', { orders : orders, payment : payment});
+        });
+        });
     });
 
     app.get('/user',isAuthenticated, function(req, res) {
-        res.render('template/user', {});
+        users.find({}, function(err, users1){
+            res.render('template/user', {users1 : users1});
+        });
     });
 
 	app.get('/dashboard',isAuthenticated, function(req, res) {

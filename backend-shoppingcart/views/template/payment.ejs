@@ -1,4 +1,4 @@
-<%layout('../layout')%>
+<% layout('../layout') %>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -8,6 +8,39 @@
     </div>
 
 
+    <div>
 
+        <% orders.forEach(function(orders) { %>
+        <% payment.forEach(function(payment) { %>
+
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Payment_id</th>
+                <th>PricePayment</th>
+                <th>bank</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><%= payment.orderids %></td>
+                <td><%= payment.pricepayment %></td>
+                <td><%= payment.bank %></td>
+                <td><%= payment.timepayment %></td>
+                <td>
+                    <button type="button" class="btn btn-success">Update</button>
+                </td>
+
+            </tr>
+            <% }); %>
+            <% }); %>
+
+            </tbody>
+
+        </table>
+    </div>
 </div>
 <!-- /#page-wrapper -->

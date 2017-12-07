@@ -9,8 +9,10 @@ var db = function() {
 
     config: function(addr, dbname, opts, callback) {
       if( !initFlag ){
-        var connectUrl = 'mongodb://' + (addr ? addr : 'localhost:27017') + '/' + (dbname ? dbname : 'sbadmin');
-        mongoose.connect(connectUrl, (opts ? opts : {}));
+        // var connectUrl = 'mongodb://' + (addr ? addr : 'localhost:27017/shopping');
+        // mongoose.connect(connectUrl, (opts ? opts : {}));
+
+          mongoose.connect('localhost:27017/shopping');
         //mongoose.createConnection(connectUrl, (opts ? opts : {}));
 
         var db = mongoose.connection;
