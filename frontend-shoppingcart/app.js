@@ -18,7 +18,7 @@ var adminRoutes = require('./routes/admin');
 
 var app = express();
 
-mongoose.connect('localhost:27017/shopping');
+mongoose.connect('admin:422544@ds133476.mlab.com:33476/shopping');
 require('./config/passport');
 require('./config/passport1');
 
@@ -27,6 +27,7 @@ app.engine('.hbs',expressHsb({defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 // uncomment after placing your favicon in /public
+
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());

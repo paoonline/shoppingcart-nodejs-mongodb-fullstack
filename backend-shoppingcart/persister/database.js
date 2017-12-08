@@ -12,7 +12,7 @@ var db = function() {
         // var connectUrl = 'mongodb://' + (addr ? addr : 'localhost:27017/shopping');
         // mongoose.connect(connectUrl, (opts ? opts : {}));
 
-          mongoose.connect('localhost:27017/shopping');
+          mongoose.connect('admin:422544@ds133476.mlab.com:33476/shopping');
         //mongoose.createConnection(connectUrl, (opts ? opts : {}));
 
         var db = mongoose.connection;
