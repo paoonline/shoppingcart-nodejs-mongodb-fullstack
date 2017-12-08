@@ -7,7 +7,9 @@
 </div>
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
-    <h1>ข้อมูลผู้ใช้งาน</h1>
+    {{# emails }}
+    <h1>ข้อมูลผู้ใช้งาน {{this.email}}</h1>
+    {{/emails}}
     <hr>
     <div class="row">
         <div class="col-xs-6 ">
@@ -46,6 +48,7 @@
         </div>
     </div>
     {{/each}}
+
 </div>
 
 </div>
