@@ -2,6 +2,7 @@ var Bbs = require('../persister/bbs');
 var Payment = require('../persister/payment');
 var Orders = require('../persister/order');
 var users = require('../persister/user');
+var Products = require('../persister/product');
 module.exports = function(app, passport){
 	
 	 /* GET home page. */
@@ -65,6 +66,32 @@ module.exports = function(app, passport){
     app.get('/user',isAuthenticated, function(req, res) {
         users.find({}, function(err, users1){
             res.render('template/user', {users1 : users1});
+        });
+    });
+
+    app.get('/product',isAuthenticated, function(req, res) {
+        Products.find({}, function(err, products){
+            res.render('template/product', {products : products});
+        });
+    });
+
+    app.get('/addproduct',isAuthenticated, function(req, res) {
+            res.render('template/addproduct');
+    });
+
+    app.post('/addproduct',isAuthenticated, function(req, res) {
+        var products = new Products({
+            title: req.body.title,
+            descriptiont: req.body.description,
+            price: req.body.price,
+            imagePath: req.body.imagePath
+        });
+        products.save(function (err, result) {
+            if(err){
+                return res.redirect('template/addproduct');
+            }else{
+                res.redirect('template/addproduct');
+            }
         });
     });
 

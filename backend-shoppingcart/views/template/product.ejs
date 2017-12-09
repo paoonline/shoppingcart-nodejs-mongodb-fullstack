@@ -1,0 +1,38 @@
+<% layout('../layout') %>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Product
+                <a href="/addproduct">
+                    <button type="button" class="btn btn-success pull-right">Add Products</button>
+                </a></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div>
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Products</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>ImagePath</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% products.forEach(function(products) { %>
+            <tr>
+                <td><%= products.title %></td>
+                <td><%= products.description %></td>
+                <td><%= products.price %></td>
+                <td><%= products.imagePath %></td>
+            </tr>
+
+            <% }); %>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<!-- /#page-wrapper -->

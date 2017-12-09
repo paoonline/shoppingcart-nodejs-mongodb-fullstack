@@ -10,21 +10,22 @@
 
     <div>
 
-        <% orders.forEach(function(orders) { %>
-        <% payment.forEach(function(payment) { %>
+
 
         <table class="table table-responsive">
             <thead>
             <tr>
-                <th>Name</th>
                 <th>Payment_id</th>
                 <th>PricePayment</th>
                 <th>bank</th>
+                <th>Time</th>
                 <th></th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
+            <% orders.forEach(function(orders) { %>
+            <% payment.forEach(function(payment) { %>
             <tr>
                 <td><%= payment.orderids %></td>
                 <td><%= payment.pricepayment %></td>
