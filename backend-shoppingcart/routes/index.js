@@ -63,6 +63,24 @@ module.exports = function(app, passport){
         });
     });
 
+    app.post('/payment',isAuthenticated, function(req, res) {
+
+        var Order = new Orders({
+
+            status: req.body.status
+        });
+        var orderid = req.body.ids;
+
+        Orders.findById(orderid, function (err, doc) {
+            if(err){
+                console.error('error, no entry found');
+            }
+           doc.status = "โอนเรียบร้อยแล้ว";
+            doc.save();
+			res.redirect('/payment');
+        });
+    });
+
     app.get('/user',isAuthenticated, function(req, res) {
         users.find({}, function(err, users1){
             res.render('template/user', {users1 : users1});
@@ -88,9 +106,9 @@ module.exports = function(app, passport){
         });
         products.save(function (err, result) {
             if(err){
-                return res.redirect('template/addproduct');
+                return res.redirect('/addproduct');
             }else{
-                res.redirect('template/addproduct');
+                res.redirect('/addproduct');
             }
         });
     });

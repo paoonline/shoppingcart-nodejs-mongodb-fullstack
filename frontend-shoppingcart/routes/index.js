@@ -106,30 +106,29 @@ router.post('/checkout', isLoggedIn,function (req, res, next) {
         });
 });
 
-router.get('/payment', isLoggedIn,function (req, res, next) {
+router.get('/payment/:id/:orderid', isLoggedIn,function (req, res, next) {
     var successMsg = req.flash('success')[0];
-    res.render('shop/payment',{successMsg: successMsg, noMessages: !successMsg});
+    var getorderid = req.params.orderid;
+    var ids = req.params.id;
+    res.render('shop/payment',{successMsg: successMsg, noMessages: !successMsg, getorderid:getorderid, ids:ids});
 });
 
-router.post('/payment', isLoggedIn,function (req, res, next) {
-
+router.post('/payment/:id/:orderid', isLoggedIn,function (req, res, next) {
     var payment = new Payment({
         orderids: req.body.orderids,
         pricepayment: req.body.pricepayment,
         timepayment: req.body.timepayment,
+        orderob: req.body.ids,
         bank: req.body.bank
-        // address: req.body.address,
-        // name: req.body.name,
-        // delivery: req.body.delivery
     });
     payment.save(function (err, result) {
         if(err){
             req.flash('error', err.message);
-            return res.redirect('/payment');
+            return res.redirect('/user/profile');
         }else{
             req.flash('success', 'แจ้งยืนยันการโอนแล้ว!');
             req.session.cart = null;
-            res.redirect('/payment');
+            res.redirect('/user/profile');
         }
     });
 });

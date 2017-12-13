@@ -8,7 +8,7 @@ var schema = new Schema({
     pricepayment: {type: Number, required:true},
     timepayment: {type: String , required:true},
     bank: {type: String, required:true},
-    user: {type: Schema.Types.ObjectId, ref: 'User'},
+    //user: {type: Schema.Types.ObjectId, ref: 'User'},
     time : {type : Date, default: dateFormat}
 });
 

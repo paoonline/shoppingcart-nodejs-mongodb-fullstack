@@ -18,7 +18,8 @@ var adminRoutes = require('./routes/admin');
 
 var app = express();
 
-mongoose.connect('admin:422544@ds133476.mlab.com:33476/shopping');
+mongoose.connect('localhost:27017/shopping');
+// admin:422544@ds133476.mlab.com:33476/shopping
 require('./config/passport');
 require('./config/passport1');
 

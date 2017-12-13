@@ -10,12 +10,14 @@
 <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
     <h1>แจ้งยืนยันการโอนเงิน</h1>
 
-    <form action="/payment" method="post" id="checkout-form">
+    <form action="/payment/:id/:orderid" method="post" id="checkout-form">
         <div class="row">
             <div class="col-xs-12">
                 <div class="form-group">
-                    <label for="orderids">เลขที่สั่งซื้อ</label>
-                    <input type="text" id="orderids" class="form-control" required name="orderids"/>
+                    <input type="hidden" id="ids" required name="ids" value="{{ids}}"></input>
+                    <input type="hidden" id="orderids" required name="orderids" value="{{getorderid}}"><h3>เลขที่สั่งซื้อ {{getorderid}}</h3></input>
+                    <!--<label for="orderids">เลขที่สั่งซื้อ</label>-->
+                    <!--<input type="text" id="orderids" class="form-control" required name="orderids"/>-->
                 </div>
             </div>
 
@@ -29,19 +31,19 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label for="timepayment">เวลาที่โอน</label>
-                    <input type="datetime-local" id="timepayment" class="form-control" required name="timepayment"/>
+                    <input type="datetime-local" id="timepayment"  required name="timepayment"/>
                 </div>
             </div>
 
             <div class="col-xs-6">
                 <div class="form-group">
-                    <div align="center"><label for="kb">ธนาคารกสิกรไทย</label></div>
+                    <div align="left"><label for="kb">ธนาคารกสิกรไทย</label></div>
                     <input type="radio" id="kb" class="form-control" value="kb" required name="bank"/>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="form-group">
-                    <div align="center"><label for="scb">ธนาคารไทยพาณิชย์</label></div>
+                    <div align="left"><label for="scb">ธนาคารไทยพาณิชย์</label></div>
                     <input type="radio" id="scb" class="form-control" value="scb" required name="bank"/>
                 </div>
             </div>

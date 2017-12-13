@@ -11,37 +11,39 @@
     <div>
 
 
+        <form action="/payment" method="post" id="payment-form">
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>Payment_id</th>
+                    <th>PricePayment</th>
+                    <th>bank</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% orders.forEach(function(orders) { %>
+                <% payment.forEach(function(payment) { %>
+                <tr>
+                    <td required name="orderid" id="orderid"><%= payment.orderids %></td>
+                    <td><%= payment.pricepayment %></td>
+                    <td><%= payment.bank %></td>
+                    <td><%= payment.timepayment %></td>
+                    <td>
 
-        <table class="table table-responsive">
-            <thead>
-            <tr>
-                <th>Payment_id</th>
-                <th>PricePayment</th>
-                <th>bank</th>
-                <th>Time</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% orders.forEach(function(orders) { %>
-            <% payment.forEach(function(payment) { %>
-            <tr>
-                <td><%= payment.orderids %></td>
-                <td><%= payment.pricepayment %></td>
-                <td><%= payment.bank %></td>
-                <td><%= payment.timepayment %></td>
-                <td>
-                    <button type="button" class="btn btn-success">Update</button>
-                </td>
+                    </td>
+                    <td><button type="button" class="btn btn-success">Update</button></td>
 
-            </tr>
-            <% }); %>
-            <% }); %>
+                </tr>
+                <% }); %>
+                <% }); %>
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
     </div>
+    </form>
 </div>
 <!-- /#page-wrapper -->

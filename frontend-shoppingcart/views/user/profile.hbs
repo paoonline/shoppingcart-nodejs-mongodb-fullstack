@@ -17,7 +17,7 @@
             <h1>รายการสั่งซื้อของฉัน</h1>
         </div>
         <div class="col-xs-6 " align="right">
-            <h1><a href="/payment" type="button" class="btn btn-success">แจ้งยืนยันการโอนเงิน</a></h1>
+
         </div>
     </div>
 
@@ -35,6 +35,7 @@
                 {{/each}}
             </ul>
             <p><strong>เวลาการสั่งซื้อ </strong>{{ this.time }}</p>
+            <h1><a href="/payment/{{this._id}}/{{this.orderid}}" type="button" class="btn btn-success">แจ้งยืนยันการโอนเงิน</a></h1>
         </div>
         <div class="panel-footer">
             <div class="row">
