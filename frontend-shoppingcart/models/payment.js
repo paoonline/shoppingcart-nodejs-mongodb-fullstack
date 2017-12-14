@@ -5,7 +5,8 @@ var nnn = new Date();
 dateFormat(nnn, "dddd, mmmm dS, yyyy, h:MM:ss TT");
 var schema = new Schema({
     orderids: {type: Number, required:true},
-    orderob: {type: Schema.Types.ObjectId, ref: 'Order'},
+    // orderob: {type: Schema.Types.ObjectId, ref: 'Order'},
+    orderob: {type: Schema.Types.ObjectId, required:true},
     pricepayment: {type: Number, required:true},
     timepayment: {type: String , required:true},
     bank: {type: String, required:true},

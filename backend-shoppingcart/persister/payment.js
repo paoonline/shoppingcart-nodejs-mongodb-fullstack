@@ -9,6 +9,8 @@ var schema = new Schema({
     timepayment: {type: String , required:true},
     bank: {type: String, required:true},
     //user: {type: Schema.Types.ObjectId, ref: 'User'},
+    // orderob: {type: Schema.Types.ObjectId, ref: 'Order'},
+    orderob: {type: Schema.Types.ObjectId, required:true},
     time : {type : Date, default: dateFormat}
 });
 

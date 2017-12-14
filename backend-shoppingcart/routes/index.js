@@ -1,8 +1,12 @@
 var Bbs = require('../persister/bbs');
+var express = require('express');
 var Payment = require('../persister/payment');
 var Orders = require('../persister/order');
 var users = require('../persister/user');
 var Products = require('../persister/product');
+var validUrl = require('valid-url');
+
+
 module.exports = function(app, passport){
 	
 	 /* GET home page. */
@@ -58,24 +62,41 @@ module.exports = function(app, passport){
         // });
         Payment.find({}, function(err, payment){
         Orders.find({}, function(err, orders){
-            res.render('template/payment', { orders : orders, payment : payment});
+            payment1 = '';
+            order1 = '';
+            res.render('template/payment', { orders : orders, payment : payment ,payment1 : payment1, order1:order1});
         });
         });
     });
 
-    app.post('/payment',isAuthenticated, function(req, res) {
-
-        var Order = new Orders({
-
-            status: req.body.status
+    app.get('/payment/:orderob/:orderids',isAuthenticated, function(req, res) {
+        Payment.find({}, function(err, payment){
+            // var url = "http://localhost:3002/payment";
+            // if (validUrl.isUri(url)){
+             //    payment1 = 0;
+            // }
+            // else{
+             //    payment1 = req.params.orderob
+			// }
+            payment1 = req.params.orderob;
+            order1 = req.params.orderids;
+            res.render('template/payment', {payment1 : payment1 ,payment :payment, order1:order1});
         });
-        var orderid = req.body.ids;
+
+    });
+
+    app.post('/payment/:orderob/:orderids',isAuthenticated, function(req, res) {
+        // // var Order = new Orders({
+        // //
+        // //     status: req.body.status
+        // // });
+        var orderid = req.body.payment1;
 
         Orders.findById(orderid, function (err, doc) {
             if(err){
                 console.error('error, no entry found');
             }
-           doc.status = "โอนเรียบร้อยแล้ว";
+            doc.status = "โอนเรียบร้อยแล้ว";
             doc.save();
 			res.redirect('/payment');
         });
