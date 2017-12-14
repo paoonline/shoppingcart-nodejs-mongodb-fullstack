@@ -110,9 +110,38 @@ module.exports = function(app, passport){
 
     app.get('/product',isAuthenticated, function(req, res) {
         Products.find({}, function(err, products){
-            res.render('template/product', {products : products});
+            ids = '';
+           title = '';
+            res.render('template/product', {products : products, ids:ids, title:title});
         });
     });
+
+    app.get('/product/:id/:title',isAuthenticated, function(req, res) {
+        Products.find({}, function(err, products){
+            // var url = "http://localhost:3002/payment";
+            // if (validUrl.isUri(url)){
+            //    payment1 = 0;
+            // }
+            // else{
+            //    payment1 = req.params.orderob
+            // }
+            ids = req.params.id;
+            title = req.params.title;
+            res.render('template/product', {products : products, ids:ids, title:title});
+        });
+
+    });
+
+    app.post('/product/:id/:title',isAuthenticated, function(req, res) {
+        // // var Order = new Orders({
+        // //
+        // //     status: req.body.status
+        // // });
+        var Product1 = req.body.product1;
+        	Products.findByIdAndRemove(Product1).exec();
+            res.redirect('/product');
+        });
+
 
     app.get('/addproduct',isAuthenticated, function(req, res) {
             res.render('template/addproduct');
@@ -121,7 +150,7 @@ module.exports = function(app, passport){
     app.post('/addproduct',isAuthenticated, function(req, res) {
         var products = new Products({
             title: req.body.title,
-            descriptiont: req.body.description,
+            description: req.body.description,
             price: req.body.price,
             imagePath: req.body.imagePath
         });
