@@ -6,24 +6,25 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-
+    <form action="/user/user" method="post" id="user-form">
     <label>Search</label>
-    <input class="form-control">
-    <p class="help-block">Example block-level help text here.</p>
+    <input class="form-control" id="search1" required name="search1">
+        <br>
 
+        <a href="/user/<% idu2 %>" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a>
     <div>
-
-
 
         <table class="table table-responsive">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Email</th>
             </tr>
             </thead>
             <% users1.forEach(function(users1) { %>
             <tbody>
             <tr>
+                <td><%= users1.id %></td>
                 <td><%= users1.email %></td>
             </tr>
 
@@ -33,5 +34,6 @@
 
         </table>
     </div>
+    </form>
 </div>
 <!-- /#page-wrapper -->

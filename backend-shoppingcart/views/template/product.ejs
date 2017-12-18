@@ -10,9 +10,9 @@
             <div align="left">
                 <input type="hidden" id="product1" required name="product1"   value="<%= ids %>"/></input>
 
-                <h3 id="order1" required name="order1" >ชื่อสินค้า <%= title %>
+                <h3 id="title" required name="title" >ชื่อสินค้า <%= title %>
                 <a href="/addproduct" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
             </div>
             <br/>
 
@@ -44,9 +44,7 @@
             </tr>
 
             <% }); %>
-
             </tbody>
-
         </table>
     </form>
     </div>

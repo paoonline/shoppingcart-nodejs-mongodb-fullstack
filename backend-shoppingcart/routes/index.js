@@ -61,11 +61,9 @@ module.exports = function(app, passport){
         //     res.render('template/payment', { title: 'Shopping Cart', Payment: productChunks});
         // });
         Payment.find({}, function(err, payment){
-        Orders.find({}, function(err, orders){
             payment1 = '';
             order1 = '';
-            res.render('template/payment', { orders : orders, payment : payment ,payment1 : payment1, order1:order1});
-        });
+            res.render('template/payment', { payment : payment ,payment1 : payment1, order1:order1});
         });
     });
 
@@ -95,16 +93,27 @@ module.exports = function(app, passport){
         Orders.findById(orderid, function (err, doc) {
             if(err){
                 console.error('error, no entry found');
-            }
-            doc.status = "โอนเรียบร้อยแล้ว";
-            doc.save();
-			res.redirect('/payment');
+                res.redirect('/payment');
+            }else
+			{
+                doc.status = "โอนเรียบร้อยแล้ว";
+                doc.save();
+                res.redirect('/payment');
+			}
         });
     });
 
     app.get('/user',isAuthenticated, function(req, res) {
         users.find({}, function(err, users1){
-            res.render('template/user', {users1 : users1});
+            idu = req.body.search1;
+            res.render('template/user', {users1 : users1,idu2:idu});
+        });
+    });
+
+    app.get('/user/idu',isAuthenticated, function(req, res) {
+        users.find({}, function(err, users1){
+        	idu = req.body.search1;
+            res.render('template/users', {users1 : users1, idu2:idu});
         });
     });
 
