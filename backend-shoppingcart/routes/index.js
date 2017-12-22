@@ -59,6 +59,20 @@ module.exports = function (app, passport) {
 		});
 	});
 
+	app.get('/orders/:odu', isAuthenticated, function (req, res) {
+		var orderId = req.query.Key;
+		console.log(orderId);
+		Orders.find({orderid:orderId}, function (err, orders) {
+			if(err){
+				res.render('/');
+			}else{
+				res.render('template/orders', { orders: orders});
+			}				
+		});
+	});	
+	
+
+
 	app.get('/payment', isAuthenticated, function (req, res) {
 		//res.render('', {});
 		// Payment.find(function (err, docs) {
@@ -111,30 +125,62 @@ module.exports = function (app, passport) {
 		});
 	});
 
+	app.get('/payment/:pdu', isAuthenticated, function (req, res) {
+		var paymentId = req.query.Key;
+		console.log(paymentId);
+		Payment.find({orderids:paymentId}, function (err, payment, payment1, order1) {
+			if(err){
+				res.render('/');
+			}else{
+				payment1 = req.params.orderob;
+				order1 = req.params.orderids;
+				res.render('template/payments', {payment1: payment1, payment: payment, order1: order1 });
+			}				
+		});
+	});	
+
 	app.get('/user', isAuthenticated, function (req, res) {
-		users.find({}, function (err, users1,idu) {
-			idu = req.body.search1;
-			res.render('template/user', { users1: users1, idu: idu });
+		users.find({}, function (err, users1) {
+			//idu = req.body.search1;
+			res.render('template/user', { users1: users1});
 		});
 	});
 
-	app.get('/user/idu', isAuthenticated, function (req, res) {
+	app.get('/users/:idu', isAuthenticated, function (req, res) {
 		
 		// users.findById(idu, function (err, users1) {
 		// 	res.render('template/users', { users1: users1, idu: idu });
 		// });
-		var idu = req.body.search1;
-		users.findById(idu, function (err, docs) {
-			if (err) {
-				res.render('/');
-			}
-			else {
+		//var idu = req.body.search1;
+		// users.findById({}, function (err, docs) {
+		// 	if (err) {
+		// 		res.render('/');
+		// 	}
+		// 	else {
 				
-				users.findById(idu, function (err, product) {
-					res.render('template/users', { items: docs });
+		// 		users.findById({}, function (err, product) {
+				
+		// 		});
+		// 	}
+		// });
+		// var userId = req.query.Key;
+		// users.find({email:userId}, function (err, docs) {
+		// 	if (err) {
+		// 		res.render('/');
+		// 	}
+		// 	else {
+						
+		// 	}
+		// });
+				var userId = req.query.Key;
+				console.log(userId);
+				users.find({email:userId}, function (err, usere) {
+					if(err){
+						res.render('/');
+					}else{
+						res.render('template/users', { items: usere});
+					}				
 				});
-			}
-		});
 	});
 
 	app.get('/product', isAuthenticated, function (req, res) {

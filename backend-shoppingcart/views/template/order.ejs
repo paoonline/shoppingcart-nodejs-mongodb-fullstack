@@ -8,8 +8,19 @@
     </div>
 
     <label>Search</label>
-    <input class="form-control">
-    <p class="help-block">Example block-level help text here.</p>
+    <input class="form-control" id="search1" required name="search1" onchange="displayname()">
+        <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
+        <br>
+
+        <!-- <a href="/users/idu" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a> -->
+
+        <script>
+            function displayname() {
+                location.href =
+                    "/orders/odu?Key=" + document.getElementById("search1").value;
+            }
+
+        </script>
 
     <div>
 

@@ -1,40 +1,54 @@
 <% layout('../layout') %>
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">User</h1>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">User</h1>
+            </div>
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <form action="/users" method="post" id="user-form">
-    <label>Search</label>
-    <input class="form-control" id="search1" required name="search1">
+        <form action="/users/idu" method="get" id="user-form"></form>
+        <label>Search</label>
+        <input class="form-control" id="search1" required name="search1" onchange="displayname()">
+        <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
         <br>
 
-        <a href="/user/idu" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a>
-    <div>
-       
+        <!-- <a href="/users/idu" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a> -->
 
-        <table class="table table-responsive">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Email</th>
-            </tr>
-            </thead>
-            <% users1.forEach(function(users1) { %>
-            <tbody>
-            <tr>
-                <td><%= users1.id %></td>
-                <td><%= users1.email %></td>
-            </tr>
+        <script>
+            function displayname() {
+                location.href =
+                    "/users/idu?Key=" + document.getElementById("search1").value;
 
-            <% }); %>
+            }
 
-            </tbody>
+        </script>
+        <div>
 
-        </table>
+
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <% users1.forEach(function(users1) { %>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= users1.id %>
+                            </td>
+                            <td>
+                                <%= users1.email %>
+                            </td>
+                        </tr>
+
+                        <% }); %>
+
+                    </tbody>
+
+            </table>
+        </div>
+        </form>
     </div>
-    </form>
-</div>
-<!-- /#page-wrapper -->
+    <!-- /#page-wrapper -->
