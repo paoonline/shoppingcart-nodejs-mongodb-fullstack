@@ -6,7 +6,20 @@
                 <!--<a href="/addproduct">-->
                     <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-plus" aria-hidden="true"></i></button>-->
                 <!--</a>-->
-            <form action="/product/<%= products.id %>/<%= products.title %>" method="post" id="products-form">
+                <input class="form-control" id="search1" required name="search1" onchange="displayname()">
+                <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
+
+
+                <!-- <a href="/users/idu" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a> -->
+
+                <script>
+                    function displayname() {
+                        location.href =
+                            "/product/prdu?Key=" + document.getElementById("search1").value;
+                    }
+                </script>
+
+                <form action="/product/<%= products.id %>/<%= products.title %>" method="post" id="products-form">
         
                 <input type="hidden" id="product1" required name="product1"   value="<%= ids %>"/></input>
 

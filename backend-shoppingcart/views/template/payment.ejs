@@ -5,22 +5,21 @@
                 <h1 class="page-header">Payment</h1>
                 <!-- /.col-lg-12 -->
 
-               
-                    <label>Search</label>
-                    <input class="form-control" id="search1" required name="search1" onchange="displayname()">
-                    <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
+
+                <label>Search</label>
+                <input class="form-control" id="search1" required name="search1" onchange="displayname()">
+                <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
 
 
-                    <!-- <a href="/users/idu" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a> -->
+                <!-- <a href="/users/idu" class="btn btn-success " role="button"><i class="fa fa-plus" aria-hidden="true"></i></a> -->
 
-                    <script>
-                        function displayname() {
-                            location.href =
-                                "/payment/pdu?Key=" + document.getElementById("search1").value;
-                        }
-
-                    </script>
-                     <form action="/payment/<%= payment.orderob %>/<%= payment.orderids %>" method="post" id="payment-form"></form>
+                <script>
+                    function displayname() {
+                        location.href =
+                            "/payment/pdu?Key=" + document.getElementById("search1").value;
+                    }
+                </script>
+                <form action="/payment/<%= payment.orderob %>/<%= payment.orderids %>" method="post" id="payment-form">
                     <div align="left">
                         <h3 id="order1" required name="order1">เลขท่ี่สั่งซื้อ
                             <%= order1 %>

@@ -22,8 +22,8 @@
     </div>
 
     {{# each orders }}
+     <form action="/profile" method="post" id="profile-form">
     <p><strong>เลขที่สั่งซื้อ </strong>{{ this.orderid }}</p>
-
     <div class="panel panel-default">
         <div class="panel-body">
             <ul class="list-group">
@@ -35,7 +35,8 @@
                 {{/each}}
             </ul>
             <p><strong>เวลาการสั่งซื้อ </strong>{{ this.time }}</p>
-            <h1><a href="/payment/{{this._id}}/{{this.orderid}}" type="button" class="btn btn-success">แจ้งยืนยันการโอนเงิน</a></h1>
+            <h1><a href="/payment/{{this._id}}/{{this.orderid}}" type="button" class="btn btn-success pull-left">แจ้งยืนยันการโอนเงิน</a></h1>
+               <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
         <div class="panel-footer">
             <div class="row">
@@ -45,12 +46,13 @@
 
                 <div class="col-md-6" align="right">
                     <strong>สถานะ: {{ this.status }} </strong>
+                    <input type="hidden" id="profile1" required name="profile1"   value="{{this.id}}"/></input>
                 </div>
             </div>
         </div>
     </div>
     {{/each}}
-
+</form>
 </div>
 
 </div>

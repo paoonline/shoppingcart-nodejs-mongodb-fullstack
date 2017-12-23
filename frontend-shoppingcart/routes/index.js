@@ -6,24 +6,36 @@ var Product = require('../models/product');
 var Order = require('../models/order');
 var Payment = require('../models/payment');
 
+router.post('/profile', isLoggedIn, function(req, res) {
+    // // var Order = new Orders({
+    // //
+    // //     status: req.body.status
+    // // });
+    var Profile1 = req.body.profile1;
+    Order.findByIdAndRemove(Profile1).exec();
+    res.redirect('/user/profile');
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    Product.find(function (err, docs) {
+    Product.find(function(err, docs) {
         var productChunks = [];
         var chunkSize = 3;
-        for (var i = 0; i < docs.length; i += chunkSize){
+        for (var i = 0; i < docs.length; i += chunkSize) {
             productChunks.push(docs.slice(i, i + chunkSize));
         }
-        res.render('shop/index', { title: 'Shopping Cart', products: productChunks});
+        res.render('shop/index', { title: 'Shopping Cart', products: productChunks });
     });
 
 });
 
-router.get('/add-to-cart/:id', function (req, res, next) {
+
+
+router.get('/add-to-cart/:id', function(req, res, next) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    Product.findById(productId, function (err, product) {
+    Product.findById(productId, function(err, product) {
         if (err) {
             return res.redirect('/');
         }
@@ -34,7 +46,7 @@ router.get('/add-to-cart/:id', function (req, res, next) {
     });
 });
 
-router.get('/reduce/:id', function (req, res, next) {
+router.get('/reduce/:id', function(req, res, next) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
@@ -43,7 +55,7 @@ router.get('/reduce/:id', function (req, res, next) {
     res.redirect('/shopping-cart');
 });
 
-router.get('/remove/:id', function (req, res, next) {
+router.get('/remove/:id', function(req, res, next) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
@@ -52,67 +64,67 @@ router.get('/remove/:id', function (req, res, next) {
     res.redirect('/shopping-cart');
 });
 
-router.get('/shopping-cart', function (req, res, next) {
-    if(!req.session.cart){
-        return res.render('shop/shopping-cart', {products: null});
+router.get('/shopping-cart', function(req, res, next) {
+    if (!req.session.cart) {
+        return res.render('shop/shopping-cart', { products: null });
     }
     var cart = new Cart(req.session.cart);
-    res.render('shop/shopping-cart', {products: cart.generateArray(), totalPrice: cart.totalPrice});
+    res.render('shop/shopping-cart', { products: cart.generateArray(), totalPrice: cart.totalPrice });
 });
 
-router.get('/checkout', isLoggedIn, function (req, res, next) {
-    if(!req.session.cart){
+router.get('/checkout', isLoggedIn, function(req, res, next) {
+    if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
     var cart = new Cart(req.session.cart);
     var errMsg = req.flash('error')[0];
-    res.render('shop/checkout', {total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
+    res.render('shop/checkout', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg });
 });
 
-router.post('/checkout', isLoggedIn,function (req, res, next) {
-    if(!req.session.cart){
+router.post('/checkout', isLoggedIn, function(req, res, next) {
+    if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
     var cart = new Cart(req.session.cart);
-        var saveDeliveryPrice = req.body.delivery;
-        var deliveryPrice = 0;
+    var saveDeliveryPrice = req.body.delivery;
+    var deliveryPrice = 0;
 
-        if(saveDeliveryPrice == 50){
-            deliveryPrice = 50;
-        }else{
-            deliveryPrice = 20;
+    if (saveDeliveryPrice == 50) {
+        deliveryPrice = 50;
+    } else {
+        deliveryPrice = 20;
+    }
+
+    var saveTotalPrice = cart.totalPrice;
+    var total = saveTotalPrice + deliveryPrice;
+    var order = new Order({
+        user: req.user,
+        cart: cart,
+        address: req.body.address,
+        name: req.body.name,
+        totalPrices: total,
+        delivery: req.body.delivery
+    });
+    order.save(function(err, result) {
+        if (err) {
+            req.flash('error', err.message);
+            return res.redirect('/checkout');
+        } else {
+            req.flash('success', 'สั่งซื้อสินค้าสำเร็จ!');
+            req.session.cart = null;
+            res.redirect('/user/profile');
         }
-
-        var saveTotalPrice = cart.totalPrice;
-        var total = saveTotalPrice +deliveryPrice;
-        var order = new Order({
-            user: req.user,
-            cart: cart,
-            address: req.body.address,
-            name: req.body.name,
-            totalPrices: total,
-            delivery: req.body.delivery
-        });
-        order.save(function (err, result) {
-            if(err){
-                req.flash('error', err.message);
-                return res.redirect('/checkout');
-            }else{
-                req.flash('success', 'สั่งซื้อสินค้าสำเร็จ!');
-                req.session.cart = null;
-                res.redirect('/user/profile');
-            }
-        });
+    });
 });
 
-router.get('/payment/:id/:orderid', isLoggedIn,function (req, res, next) {
+router.get('/payment/:id/:orderid', isLoggedIn, function(req, res, next) {
     var successMsg = req.flash('success')[0];
     var getorderid = req.params.orderid;
     var ids = req.params.id;
-    res.render('shop/payment',{successMsg: successMsg, noMessages: !successMsg, getorderid:getorderid, ids:ids});
+    res.render('shop/payment', { successMsg: successMsg, noMessages: !successMsg, getorderid: getorderid, ids: ids });
 });
 
-router.post('/payment/:id/:orderid', isLoggedIn,function (req, res, next) {
+router.post('/payment/:id/:orderid', isLoggedIn, function(req, res, next) {
     var payment = new Payment({
         orderids: req.body.orderids,
         pricepayment: req.body.pricepayment,
@@ -120,11 +132,11 @@ router.post('/payment/:id/:orderid', isLoggedIn,function (req, res, next) {
         orderob: req.body.ids,
         bank: req.body.bank
     });
-    payment.save(function (err, result) {
-        if(err){
+    payment.save(function(err, result) {
+        if (err) {
             req.flash('error', err.message);
             return res.redirect('/user/profile');
-        }else{
+        } else {
             req.flash('success', 'แจ้งยืนยันการโอนแล้ว!');
             req.session.cart = null;
             res.redirect('/user/profile');
@@ -132,35 +144,33 @@ router.post('/payment/:id/:orderid', isLoggedIn,function (req, res, next) {
     });
 });
 
-router.get('/productDetail/:id', function (req, res, next) {
-    Product.findById(req.params.id, function (err, docs) {
-        if(err){
+router.get('/productDetail/:id', function(req, res, next) {
+    Product.findById(req.params.id, function(err, docs) {
+        if (err) {
             res.render('/');
-        }
-        else{
+        } else {
             var productId = req.params.id;
-            Product.findById(productId, function (err, product) {
+            Product.findById(productId, function(err, product) {
                 console.log(req.session.cart);
-                res.render('shop/productDetail', {items: docs});
+                res.render('shop/productDetail', { items: docs });
             });
         }
     });
 });
 
-router.get('/productDetail/:id/:title', function (req, res, next) {
-    Product.findById(req.params.id, function (err, docs) {
-        if(err){
+router.get('/productDetail/:id/:title', function(req, res, next) {
+    Product.findById(req.params.id, function(err, docs) {
+        if (err) {
             res.render('/');
-        }
-        else{
+        } else {
             var productId = req.params.id;
             var cart = new Cart(req.session.cart ? req.session.cart : {});
 
-            Product.findById(productId, function (err, product) {
+            Product.findById(productId, function(err, product) {
                 cart.add(product, product.id);
                 req.session.cart = cart;
                 console.log(req.session.cart);
-                res.render('shop/productDetail', {items: docs});
+                res.render('shop/productDetail', { items: docs });
             });
         }
     });
@@ -169,7 +179,7 @@ router.get('/productDetail/:id/:title', function (req, res, next) {
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         return next();
     }
     req.session.oldUrl = req.url;

@@ -217,6 +217,20 @@ module.exports = function (app, passport) {
 		res.redirect('/product');
 	});
 
+	app.get('/product/:prdu', isAuthenticated, function (req, res) {
+		var productsId = req.query.Key;
+		console.log(productsId);
+		Products.find({title:productsId}, function (err, products) {
+			if(err){
+				res.render('/');
+			}else{
+				ids = req.params.id;
+				title = req.params.title;
+				res.render('template/products', {products: products, ids: ids, title: title });
+			}				
+		});
+	});	
+
 	app.get('/editproduct/:id', isAuthenticated, function (req, res) {
 		Products.findById(req.params.id, function (err, docs) {
 			if (err) {
