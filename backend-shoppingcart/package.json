@@ -18,6 +18,7 @@
     "ejs": "~2.3.1",
     "ejs-locals": "*",
     "express": "^4.16.2",
+    "express-fileupload": "^0.3.0",
     "express-session": "*",
     "formidable": "^1.1.1",
     "mongoose": "*",
