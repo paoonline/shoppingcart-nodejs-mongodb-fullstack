@@ -6,8 +6,8 @@
                 <!-- /.col-lg-12 -->
 
 
-                <label>Search</label>
-                <input class="form-control" id="search1" required name="search1" onchange="displayname()">
+                <!-- <label>Search</label>
+                <input class="form-control" id="search1" required name="search1" onchange="displayname()"> -->
                 <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
 
 
@@ -22,16 +22,16 @@
                 <form action="/payment/<%= payment.orderob %>/<%= payment.orderids %>" method="post" id="payment-form">
                     <div align="left">
                         <h3 id="order1" required name="order1">เลขท่ี่สั่งซื้อ
-                            <%= order1 %>
+                            <%= order1 %> <button type="submit" class="btn btn-success">Update</button> <br/><br/>
                         </h3>
                         <input type="hidden" id="payment1" required name="payment1" value="<%= payment1%>" />
 
-                        <button type="submit" class="btn btn-success">Update</button>
+
                     </div>
             </div>
         </div>
         <div>
-            <table class="table table-responsive">
+            <table class="table table-striped  table-hover" id="mydata">
                 <thead>
                     <tr>
                         <th>Payment_id</th>
@@ -59,7 +59,7 @@
                             <td>
                                 <%= payment.timepayment %>
                             </td>
-                            <td>
+                            <td align="center">
                                 <!--<button type="submit" class="btn btn-success">Update</button></td>-->
                                 <a href="/payment/<%= payment.orderob %>/<%= payment.orderids %>" type="submit" class="btn btn-success">Select</a>
                             </td>

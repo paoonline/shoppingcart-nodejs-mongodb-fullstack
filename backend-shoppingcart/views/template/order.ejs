@@ -1,14 +1,14 @@
 <% layout('../layout') %>
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Order</h1>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Order</h1>
+            </div>
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.col-lg-12 -->
-    </div>
 
-    <label>Search</label>
-    <input class="form-control" id="search1" required name="search1" onchange="displayname()">
+        <!-- <label>Search</label>
+    <input class="form-control" id="search1" required name="search1" onchange="displayname()"> -->
         <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
         <br>
 
@@ -19,45 +19,57 @@
                 location.href =
                     "/orders/odu?Key=" + document.getElementById("search1").value;
             }
-
         </script>
 
-    <div>
+        <div>
 
 
 
-        <table class="table table-responsive">
-            <thead>
-            <tr>
+            <table class="table table-striped  table-hover" id="mydata">
+                <thead>
+                    <tr>
 
-                <th>Name</th>
-                <th>Address</th>
-                <th>Order_id</th>
-                <th>Delivery:</th>
-                <th>Status</th>
-                <th>totalPrices</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Order_id</th>
+                        <th>Delivery:</th>
+                        <th>Status</th>
+                        <th>totalPrices</th>
 
-            </tr>
-            </thead>
-            <% orders.forEach(function(orders) { %>
-            <tbody>
-            <tr>
+                    </tr>
+                </thead>
 
-                <td><%= orders.name %></td>
-                <td><%= orders.address %></td>
-                <td><%= orders.orderid %></td>
-                <td><%= orders.delivery %></td>
-                <td><%= orders.status %></td>
-                <td><%= orders.totalPrices %></td>
+                <tbody>
+                    <% orders.forEach(function(orders) { %>
+                        <tr>
+
+                            <td>
+                                <%= orders.name %>
+                            </td>
+                            <td>
+                                <%= orders.address %>
+                            </td>
+                            <td>
+                                <%= orders.orderid %>
+                            </td>
+                            <td>
+                                <%= orders.delivery %>
+                            </td>
+                            <td>
+                                <%= orders.status %>
+                            </td>
+                            <td>
+                                <%= orders.totalPrices %>
+                            </td>
 
 
-            </tr>
+                        </tr>
 
-            <% }); %>
+                        <% }); %>
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
+        </div>
     </div>
-</div>
-<!-- /#page-wrapper -->
+    <!-- /#page-wrapper -->

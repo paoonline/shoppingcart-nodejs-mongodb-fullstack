@@ -144,7 +144,7 @@ module.exports = function(app, passport) {
         app.get('/user', isAuthenticated, function(req, res) {
             users.find({}, function(err, users1) {
                 //idu = req.body.search1;
-                res.render('template/user', { users1: users1 });
+                res.render('template/user', { users1: users1, n: 1 });
             });
         });
 

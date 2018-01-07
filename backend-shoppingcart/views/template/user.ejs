@@ -7,8 +7,8 @@
             <!-- /.col-lg-12 -->
         </div>
         <form action="/users/idu" method="get" id="user-form"></form>
-        <label>Search</label>
-        <input class="form-control" id="search1" required name="search1" onchange="displayname()">
+        <!-- <label>Search</label>
+        <input class="form-control" id="search1" required name="search1" onchange="displayname()"> -->
         <!-- <input type= text id="namehere" onchange="displayname()"  required name="namehere"> -->
         <br>
 
@@ -20,20 +20,19 @@
                     "/users/idu?Key=" + document.getElementById("search1").value;
 
             }
-
         </script>
         <div>
 
-
-            <table class="table table-responsive">
+            <table class="table table-striped  table-hover" id="mydata">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Email</th>
                     </tr>
                 </thead>
-                <% users1.forEach(function(users1) { %>
-                    <tbody>
+
+                <tbody>
+                    <% users1.forEach(function(users1) { %>
                         <tr>
                             <td>
                                 <%= users1.id %>
@@ -45,7 +44,7 @@
 
                         <% }); %>
 
-                    </tbody>
+                </tbody>
 
             </table>
         </div>
